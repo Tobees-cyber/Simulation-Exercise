@@ -70,7 +70,10 @@ int main() {
         
         // Werte zur Kontorlle ausgeben
         for (int i = 0; i < state.size(); i++) {
-            std::cout << state[i].name << " | Wirtschaft: " << state[i].economic_strength << "\n";
+            std::cout << state[i].name << " | Wirtschaft: " << state[i].economic_strength 
+                      << " | Territorium: " << state[i].territory 
+                      << " | Stabilität: " << state[i].political_stability
+                      << " | Militär: " << state[i].get_effective_military() << "\n";
         }
 
         if (!auto_mode) {

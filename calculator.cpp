@@ -5,7 +5,7 @@
 void update_simulation(std::vector<State>& state_list) {
     for (int i = 0; i < state_list.size(); i++) {
         // Wirtschaftswachstum für staaten berechnen
-        state_list[i].economic_strength *= 1.015f; 
+        state_list[i].economic_strength *= 1.0f + (0.015f * state_list[i].political_stability); 
     }
 
     // Konflikt Logik
@@ -26,8 +26,14 @@ void update_simulation(std::vector<State>& state_list) {
 
                     state_list[defender_idx].political_stability -= 0.02f;
 
+                    state_list[defender_idx].economic_strength -= 0.5f;
+
                     if (state_list[defender_idx].political_stability < 0.0f) {
                         state_list[defender_idx].political_stability = 0.0f;
+                    }
+
+                    if (state_list[defender_idx].economic_strength < 0.0f) {
+                        state_list[defender_idx].economic_strength = 0.0f;
                     }
 
                     std::cout << "[Einfluss] " << state_list[attacker_idx].name 
